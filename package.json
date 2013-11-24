@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "dependencies": {
+    "es5-shimify": "~2.0.5",
+    "json2ify": "~0.0.3",
+    "jqueryify": "~1.9.1",
+    "spine": "~1.2.0",
+    "codemirror": "~3.2.0",
+    "iced-coffee-script": "~1.6.0",
+    "emoji-images": "~0.1.1"
+  }
+}

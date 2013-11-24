@@ -1,0 +1,235 @@
+@import './mixin'
+@import './glyphicons-netdna-cdn.css'
+
+html, body
+	width: 100%
+	height: 100%
+
+body
+	color: #444
+	background: #F8F8F8
+	position: absolute
+	top: 0
+	left: 0
+	margin: 0
+	font-family: Montserrat,Helvetica,Arial,sans-serif
+
+h2
+	text-align: center
+	font-size: 22px
+
+p
+	text-align: center
+	font-size: 16px
+
+header
+	width: 100%
+	position: fixed
+	left: 0
+	top: 0
+
+	h2
+		text-transform: lowercase
+		font: bold 48px Montserrat,Helvetica,Arial,sans-serif
+		letter-spacing: -5px
+		color: #FF005F
+		margin: 15px
+
+section.playground
+	position: absolute
+	left: 10px
+	top: 80px
+	right: 50%
+	bottom: 80px
+	margin: 10px
+
+aside#output
+	position: absolute
+	left: 10px
+	right: 50%
+	bottom: 80px
+	height: 120px
+	background: rgba(255,255,255,0.8)
+	opacity: 0.8
+	padding: 10px
+	font-family: monospace
+	white-space: pre
+	margin: 10px
+
+input.repl
+	position: absolute
+	left: 10px
+	right: 50%
+	bottom: 80px
+	height: 20px
+	// background: rgba(255,255,255,0.8)
+	opacity: 0.8
+	padding: 2px
+	font-family: monospace
+	white-space: pre
+	margin: 10px
+	border: 1px solid #AAA
+
+.console-label
+	position: absolute
+	left: 14px
+	bottom: 204px
+	margin: 10px
+	opacity: 0.8
+	text-transform: uppercase
+	font-family: monospace
+	font-size: 9px
+
+textarea.sandbox, div.sandbox
+	position: absolute
+	left: 50%
+	top: 80px
+	right: 10px
+	bottom: 80px
+	background: rgba(0,0,0,0.8)
+	color: #EEE
+	padding: 30px
+	margin: 10px
+	border: 0
+
+div.CodeMirror.sandbox
+	padding: 0
+	height: auto
+	line-height: 1.2
+
+div.CodeMirror.sandbox.draghover
+	box-shadow: 0 0 5px rgba(0, 128, 255, 1)
+	-webkit-box-shadow: 0 0 5px rgba(0, 128, 255, 1)
+	-moz-box-shadow: 0 0 5px rgba(0, 128, 255, 1)
+	border: 1px solid rgba(0, 128, 255, 0.8)
+
+select.examples
+	position: absolute
+	right: 20px
+	top: 36px
+
+button.run
+	padding: 5px 10px
+	position: absolute
+	right: 20%
+	width: 10%
+	bottom: 110px
+	text-transform: lowercase
+	font: bold 32px Montserrat, Helvetica, Arial, sans-serif
+	letter-spacing: -2px
+	color: #F8f8f8
+	background: #444
+	border: 1px solid black
+
+button.run:hover, button.run:active
+	background: #A6E22A
+
+button.run.selected:hover, button.run.selected:active
+	background: #FF005F
+
+button.refresh-example, button.refresh-playground
+	position: absolute
+	top: 0px
+	width: 26px
+	height: 26px
+	padding: 0px 2px
+	font-size: 14px
+
+button.refresh-playground
+	display: none
+	left: 106px
+	top: 94px
+	display: none
+
+nav.sandbox
+	display: none
+	position: absolute
+	right: 40px
+	top: 94px
+	width: 94px
+	height: 26px
+	z-index: 1000
+
+	button
+		height: 26px
+		width: 26px
+		outline: 0
+		background: #f4f5f5
+		background-image: linear-gradient(to bottom, #f4f5f5, #dfdddd)
+		border: 1px solid #444
+		// box-shadow: inset 1px 1px 1px rgba(181,181,181,0.7)
+
+	button.refresh-example
+		right: 0px
+
+	button.langswitch-vanilla
+		position: absolute
+		right: 42px
+		top: 0px
+		padding: 1px 0 0
+
+	button.langswitch-coffee
+		position: absolute
+		right: 65px
+		top: 0px
+		padding: 1px 0 0
+
+	button:active, button.selected
+		// border:1px solid #bfc4c4;
+		background-color: #d9dddd
+		background-image: linear-gradient(to bottom, #d9dddd, #8A8A8A)
+		box-shadow: inset 1px 1px 1px rgba(18,18,18,0.3)
+		// filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d9dddd, endColorstr=#c6c3c3)
+
+a#pixi
+	display: block
+	position: absolute
+	width: 56px
+	height: 22px
+	bottom: 90px
+	right: 20px
+	background: center center no-repeat url("images/pixi.png") #11112A
+	z-index: 100
+	padding: 2px
+
+#stats
+	position: absolute
+	left: 10px
+	top: 80px
+	margin: 10px
+
+footer
+	clear: both
+	width: 100%
+	position: fixed
+	left: 0
+	bottom: 0
+	font-family: monospace
+	text-align: center
+	padding: 15px
+
+
+//
+// EXAMPLES
+//
+
+// Example 4 - Balls
+@import './storm.css'
+
+// Bunnymark
+.counter
+	position: absolute
+	background: rgba(244,244,244,0.8)
+	color: #444
+	top: 80px
+	right: 50%
+	margin: 10px
+	padding: 2px 6px
+	font-family: monospace
+
+//
+// LIBS
+//
+
+@import '../node_modules/codemirror/lib/codemirror.css'
+@import './monokai.css'
