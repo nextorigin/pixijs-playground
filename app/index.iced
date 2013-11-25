@@ -28,6 +28,7 @@ class App extends Spine.Controller
     button = $ "button.run"
     if button.is ".selected" then button.trigger "click", target: button[0]
     @stage.refresh()
+    @$(".dg.main").add(".counter").remove()
 
   selectExample: (e) -> @editor.render $(e.target).val()
 

@@ -228,11 +228,13 @@ a#pixi
 	position: absolute
 	width: 56px
 	height: 22px
-	bottom: 90px
+	bottom: 64px
 	right: 20px
 	background: center center no-repeat url("images/pixi.png") #11112A
 	z-index: 100
 	padding: 2px
+	border: 1px solid #DDD
+	border-top: 0
 
 #stats
 	position: absolute
@@ -281,11 +283,25 @@ footer.draghover h3
 	position: absolute
 	background: rgba(244,244,244,0.8)
 	color: #444
-	top: 80px
-	right: 50%
+	top: 140px
+	left: 10px
 	margin: 10px
 	padding: 2px 6px
 	font-family: monospace
+
+// Filters
+.dg.a
+	float: none!important
+	z-index: 200
+	right: 50%
+	top: 80px
+	margin: 10px!important
+	overflow-x: hidden
+	position: absolute
+	min-height: 20px
+
+	.close-button
+		position: relative!important
 
 //
 // LIBS

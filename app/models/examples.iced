@@ -18,6 +18,7 @@ exampleList =
   primitives:    "/examples/primitives.coffee"
   rendertexture: "/examples/rendertexture.coffee"
   text:          "/examples/text.iced"
+  filters:       "/examples/filters.coffee"
 
 examples = {}
 for name, path of exampleList then do (path) ->
