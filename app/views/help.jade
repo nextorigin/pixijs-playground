@@ -1,0 +1,64 @@
+aside#help
+  h4 Editor
+  dl
+    dt :icecream:
+    dd switch code to vanilla JS (compiles)
+    dt :coffee:
+    dd switch code to Iced CoffeeScript (does not compile)
+    dt
+      button.glyphicon.glyphicon-refresh
+    dd Refresh example from CoffeeScript source
+    dt
+      button.glyphicon.glyphicon-floppy-disk
+    dd Save script and assets to in-browser Local Storage
+  h4 Stage/Canvas
+  dl
+    dt
+      button.glyphicon.glyphicon-refresh
+    dd Remove children from stage (and stop animation)
+  h4 Console
+  dl
+    dt
+      button.glyphicon.glyphicon-refresh
+    dd Clear console
+    dt :arrow_up::arrow_down:
+    dd Browse REPL history
+    dt :leftwards_arrow_with_hook:
+    dd Run command
+  h4 Global variables
+  dl.globals
+    dt app
+    dd instance of this running pixijs-playground webapp
+    dt stats
+    dd instance of Mr. Doob's&nbsp;
+      a(href="https://github.com/mrdoob/stats.js") stats.js
+    dt frame
+    dd id of animation frame (useful with&nbsp;
+      tt cancelAnimationFrame(frame)
+      | )
+    dt app
+    dd instance of this pixijs-playground webapp
+    dt stage
+    dd current instance of&nbsp;
+      a(href="http://www.goodboydigital.com/pixijs/docs/classes/Stage.html") PIXI.Stage
+      | &nbsp;(when running)
+    dt renderer
+    dd current instance of either&nbsp;
+      a(href="http://www.goodboydigital.com/pixijs/docs/classes/WebGLRenderer.html") PIXI.WebGLRenderer
+      | &nbsp;or&nbsp;
+      a(href="http://www.goodboydigital.com/pixijs/docs/classes/CanvasRenderer.html") PIXI.CanvasRenderer
+      | , depending on the result of <tt>PIXI.autoDetectRenderer</tt> (when running)
+    dt ani
+    dd <em>(function)</em> Animation Loop wrapper. Starts/ends stats, calls frame fn,
+      | renders frame to stage, and loops.
+      pre
+        | ani: (loopfn) ->
+        |   recursiveloop = ->
+        |     @stats.begin()
+        |     loopfn()
+        |     @renderer.render @stage
+        |     window.frame = requestAnimFrame recursiveloop
+        |     @stats.end()
+        |   window.frame = requestAnimFrame recursiveloop
+    a.forkme(href="https://github.com/nextorigin/pixijs-playground")
+      img(src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub")

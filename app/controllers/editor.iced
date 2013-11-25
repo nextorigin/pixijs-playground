@@ -11,6 +11,11 @@ class Editor extends Spine.Controller
   elements:
     "nav.sandbox": "navSandbox"
     "textarea.sandbox": "placeholder"
+    "aside#help": "help"
+
+  toggleHelp: ->
+    if @help.is ":visible" then @help.fadeOut 300
+    else @help.fadeIn 300
 
   runOrStopUserScript: (e) ->
     button = $(e.target).closest('button')
@@ -69,6 +74,7 @@ class Editor extends Spine.Controller
     else @_lang
 
   events:
+    "click button.help": "toggleHelp"
     "click button.run": "runOrStopUserScript"
     "click button.refresh-example": "refreshExample"
     "mouseenter .CodeMirror": "mouseenterExampleNav"

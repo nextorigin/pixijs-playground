@@ -151,35 +151,76 @@ nav.sandbox
 	z-index: 1000
 
 	button
-		height: 26px
+		position: absolute
+		top: 0px
 		width: 26px
+		height: 26px
+		padding: 1px 0 0
 		outline: 0
 		background: #f4f5f5
 		background-image: linear-gradient(to bottom, #f4f5f5, #dfdddd)
 		border: 1px solid #444
-		// box-shadow: inset 1px 1px 1px rgba(181,181,181,0.7)
 
 	button.refresh-example
 		right: 0px
+		padding: 0
 
-	button.langswitch-vanilla
-		position: absolute
-		right: 42px
-		top: 0px
-		padding: 1px 0 0
+	button.help
+		right: 130px
+		padding: 0
+		font-size: 14px
 
 	button.langswitch-coffee
-		position: absolute
 		right: 65px
-		top: 0px
-		padding: 1px 0 0
+
+	button.langswitch-vanilla
+		right: 42px
 
 	button:active, button.selected
-		// border:1px solid #bfc4c4;
+		// border:1px solid #bfc4c4
 		background-color: #d9dddd
 		background-image: linear-gradient(to bottom, #d9dddd, #8A8A8A)
 		box-shadow: inset 1px 1px 1px rgba(18,18,18,0.3)
 		// filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d9dddd, endColorstr=#c6c3c3)
+
+aside#help
+	display: none
+	position: absolute
+	z-index: 2000
+	left: 50%
+	top: 116px
+	width: 600px
+	margin-left: -300px
+	box-sizing: border-box
+	border: 1px solid #AAA
+	border-radius: 3px
+	background: #FDF5A9
+	box-shadow: 2px 16px 48px rgba(40,40,40,0.45)
+	padding: 0 30px
+	font: 14px Helvetica, Helvetica Neue, Arial, sans-serif
+
+	dt
+		height: 1.5em
+		font-family: monospace
+
+		button
+			height: 22px
+			width: 22px
+			padding: 0 1px
+
+	dd
+		margin: -1em 0 0 50px
+		position: relative
+		top: -0.35em
+
+	dl.globals dd
+		margin-left: 72px
+
+	a.forkme img
+		position: absolute
+		top: 0
+		right: 0
+		border: 0
 
 a#pixi
 	display: block

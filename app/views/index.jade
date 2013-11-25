@@ -11,9 +11,11 @@ select.examples
     option(value=name, selected=example == name) #{name}
 button.run Run!
 nav.sandbox
+  button.help.glyphicon.glyphicon-question-sign
   button.langswitch-coffee.selected :coffee:
   button.langswitch-vanilla :icecream:
   button.refresh-example.glyphicon.glyphicon-refresh
+include help
 a#pixi(href="//pixijs.com")
 footer &copy; 2013&nbsp;
   a(href="http://nextorig.in") Next Origin
