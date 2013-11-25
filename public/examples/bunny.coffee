@@ -1,3 +1,4 @@
+## Bunny demo
 ## http://www.goodboydigital.com/pixi-js-tutorial-getting-started/
 
 # create the sprite from bunny texture

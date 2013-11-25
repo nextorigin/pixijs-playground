@@ -8,14 +8,19 @@ loadExample = (url, autocb) ->
     when "success" then data
 
 
-examples =
-  bunny: (cb) -> loadExample "/examples/bunny.coffee", cb
+exampleList =
+  bunny:         "/examples/bunny.coffee"
+  "bunny-short": "/examples/bunny-short.coffee"
+  dragging:      "/examples/dragging.coffee"
+  balls:         "/examples/balls.coffee"
+  bunnymark:     "/examples/bunnymark.coffee"
+  morph:         "/examples/morph.coffee"
+  primitives:    "/examples/primitives.coffee"
+  rendertexture: "/examples/rendertexture.coffee"
+  text:          "/examples/text.iced"
 
-  "bunny-short": (cb) -> loadExample "/examples/bunny-short.coffee", cb
-
-  balls: (cb) -> loadExample "/examples/balls.coffee", cb
-
-  bunnymark: (cb) -> loadExample "/examples/bunnymark.coffee", cb
-
+examples = {}
+for name, path of exampleList then do (path) ->
+  examples[name] = (cb) -> loadExample path, cb
 
 module.exports = examples

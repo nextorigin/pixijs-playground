@@ -1,14 +1,17 @@
+## Bunnymark
 ## http://www.goodboydigital.com/pixijs/bunnymark/
 
-
-wabbitTexture = undefined
-pirateTexture = undefined
-bunnys = []
+# Try changing these values in the REPL
+# while the code is running!
 gravity = 0.75
 maxX = stage.width
 minX = 0
 maxY = stage.height
 minY = 0
+
+wabbitTexture = undefined
+pirateTexture = undefined
+bunnys = []
 startBunnyCount = 10
 isAdding = false
 count = 0
@@ -33,14 +36,12 @@ update = ->
       bunny.speedY = (Math.random() * 10) - 5
       bunny.anchor.x = 0.5
       bunny.anchor.y = 1
-
-      #bunny.alpha = 0.3 + Math.random() * 0.7
-      bunnys.push bunny
+      # bunny.alpha = 0.3 + Math.random() * 0.7
       bunny.scale.y = 1
-
-      #bunny.rotation = Math.random() - 0.5
-      random = Math2.randomInt(0, container.children.length - 2)
+      # bunny.rotation = Math.random() - 0.5
+      # random = Math2.randomInt(0, container.children.length - 2)
       container.addChild bunny #, random
+      bunnys.push bunny
       count++
 
     amount = 0 if count >= 16500
@@ -104,8 +105,7 @@ start = ->
   onTouchStart = (event) -> isAdding = true
   onTouchEnd = (event) -> isAdding = false
 
-  $(document).add(renderer.view)
-    .mousedown(onTouchStart)
+  $(document).mousedown(onTouchStart)
     .mouseup(onTouchEnd)
 
 start()
