@@ -11,6 +11,7 @@ class Editor extends Spine.Controller
   elements:
     "nav.sandbox": "navSandbox"
     "textarea.sandbox": "placeholder"
+    "footer": "footer"
     "aside#help": "help"
 
   toggleHelp: ->
@@ -82,9 +83,9 @@ class Editor extends Spine.Controller
     "mouseleave .CodeMirror": "mouseleaveExampleNav"
     "click button.langswitch-coffee": "switchLang"
     "click button.langswitch-vanilla": "switchLang"
-    "dragover .CodeMirror": "fileDragHover"
-    "dragleave .CodeMirror": "fileDragHover"
-    "drop .CodeMirror": "fileSelectHandler"
+    "dragover footer": "fileDragHover"
+    "dragleave footer": "fileDragHover"
+    "drop footer": "fileSelectHandler"
 
   constructor: (options, settings = {}) ->
     @history = []
@@ -175,7 +176,7 @@ class Editor extends Spine.Controller
   fileDragHover: (e) ->
     e.stopPropagation()
     e.preventDefault()
-    @wrapper.toggleClass "draghover", e.type is "dragover"
+    @footer.toggleClass "draghover", e.type is "dragover"
 
   fileSelectHandler: (e) ->
     # cancel event and hover styling

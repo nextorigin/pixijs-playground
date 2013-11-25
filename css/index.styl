@@ -96,12 +96,8 @@ div.CodeMirror.sandbox
 	padding: 0
 	height: auto
 	line-height: 1.2
-
-div.CodeMirror.sandbox.draghover
-	box-shadow: 0 0 5px rgba(0, 128, 255, 1)
-	-webkit-box-shadow: 0 0 5px rgba(0, 128, 255, 1)
-	-moz-box-shadow: 0 0 5px rgba(0, 128, 255, 1)
-	border: 1px solid rgba(0, 128, 255, 0.8)
+	box-sizing: border-box
+	border: 1px solid #DDD
 
 select.examples
 	position: absolute
@@ -245,10 +241,28 @@ footer
 	position: fixed
 	left: 0
 	bottom: 0
-	font-family: monospace
+	height: 80px
 	text-align: center
-	padding: 15px
+	padding: 0 15px
 
+	h3
+		text-transform: uppercase
+		font-size: 50px
+		color: #EBEBEB
+		margin: 0
+		letter-spacing: 10px
+		transition: all 0.25s ease-in-out
+
+	span
+		font-family: monospace
+		display: block
+
+footer.draghover h3
+	color: #00BBFF
+	// box-shadow: 0 0 5px rgba(0, 128, 255, 1)
+	// -webkit-box-shadow: 0 0 5px rgba(0, 128, 255, 1)
+	// -moz-box-shadow: 0 0 5px rgba(0, 128, 255, 1)
+	// border-top: 1px solid rgba(0, 128, 255, 0.8)
 
 //
 // EXAMPLES
