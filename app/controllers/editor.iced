@@ -18,6 +18,11 @@ class Editor extends Spine.Controller
     if @help.is ":visible" then @help.fadeOut 300
     else @help.fadeIn 300
 
+  saveSettings: ->
+    input = @val()
+    @addToSaved input
+    localStorage.settings = JSON.stringify $.extend {}, @settings, assets: window.assets, script: @saved
+
   runOrStopUserScript: (e) ->
     button = $(e.target).closest('button')
     if button.is ".selected"
@@ -76,6 +81,7 @@ class Editor extends Spine.Controller
 
   events:
     "click button.help": "toggleHelp"
+    "click button.save": "saveSettings"
     "click button.run": "runOrStopUserScript"
     "click button.refresh-example": "refreshExample"
     "mouseenter .CodeMirror": "mouseenterExampleNav"
@@ -100,6 +106,9 @@ class Editor extends Spine.Controller
     if localStorage and localStorage.settings
       for k, v of JSON.parse(localStorage.settings)
         @settings[k] = v
+        switch k
+          when "assets", "userscripts"
+            window[k] = v
 
     for own k, v of settings
       @settings[k] = v
@@ -119,6 +128,9 @@ class Editor extends Spine.Controller
     }
     @wrapper = $ @codemirror.getWrapperElement()
     @wrapper.addClass "sandbox"
+    if @settings.script
+      @val @settings.script
+      @scrollToEnd()
 
   render: (examplename) ->
     @loadExample examplename
@@ -131,7 +143,9 @@ class Editor extends Spine.Controller
     @example = name
     await @examples[name] defer example
     @val example
-    @codemirror.scrollIntoView @codemirror.doc.lineCount() - 1
+    @scrollToEnd()
+
+  scrollToEnd: -> @codemirror.scrollIntoView @codemirror.doc.lineCount() - 1
 
   refreshExample: -> @loadExample @example
 
@@ -168,8 +182,8 @@ class Editor extends Spine.Controller
   #     return false
 
   switchToCoffee: ->
-    @clear()
-    @refreshExample()
+    # @clear()
+    # @refreshExample()
     @lang "coffee"
     return true
 
@@ -236,17 +250,26 @@ var newimage = #{varname}
       when "coffee" then """# #{name}
 # if this is a CommonJS module, run:
 # require.define "module-name": eval #{varname}
+#
+# to save this in localStorage with the script, run:
+# app.editor.saveUserScript #{varname}
 newscript = #{varname}
 #{@val().trim()}
 """
       when "vanilla" then """// #{name}
 // if this is a CommonJS module, run:
 // require.define({"module-name": eval(#{varname})})
+//
+// to save this in localStorage with the script, run:
+// app.editor.saveUserScript(#{varname})
 var newscript = #{varname}
 #{@val().trim()}
 """
     @val value
     @codemirror.scrollIntoView 0
 
+  saveUserScript: (script) ->
+    @settings.userscripts ?= []
+    @settings.userscripts.push script unless script in @settings.userscripts
 
 module.exports = Editor

@@ -50,6 +50,9 @@ class App extends Spine.Controller
     if localStorage and localStorage.settings
       for k, v of JSON.parse(localStorage.settings)
         @settings[k] = v
+        switch k
+          when "script" then do (v) ->
+            examples["local-saved"] = (cb) -> cb v
 
     for own k, v of settings
       @settings[k] = v
@@ -67,7 +70,6 @@ class App extends Spine.Controller
     @view = emoji @view, "images/emoji", 20
     @html @view
 
-    @log "settings.lang #{@settings.lang}"
     @console  = new Console el: @output, input: @$ "input.repl"
     @editor   = new Editor el: @el, examples: examples, console: @console
     @editor.on "presave", @proxy @initStage
@@ -75,7 +77,7 @@ class App extends Spine.Controller
     @editor.lang @settings.lang
 
     @refreshPlayground() if @stage
-    @editor.render example
+    @editor.render example unless @settings.script and @settings.script.trim() isnt ""
 
   langChange: (name) -> @settings.lang = name
 
