@@ -66,7 +66,7 @@ class FileQueue
       return reader.abort(statusText) if reader
       index = @queue().indexOf(request)
       @queue().splice(index, 1) if index > -1
-      Ajax.pipeliner.n_out-- if Ajax.pipeliner
+      @pipeliner.n_out-- if @pipeliner
 
       # deferred.rejectWith(
       #   settings.context or settings,
@@ -74,7 +74,7 @@ class FileQueue
       # )
       request
 
-    return request unless Ajax.enabled
+    return request unless @enabled
     @queue request
     request
 
