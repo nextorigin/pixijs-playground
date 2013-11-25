@@ -190,9 +190,16 @@ class Editor extends Spine.Controller
     @parseFile file for file in files
 
   parseFile: (file) ->
-    {name, type} = file
-    return @console.print "Unknown filetype: #{type}" unless /(png|gif|jpeg|jpg)/.test type
+    {type} = file
+    if /(png|gif|jpeg|jpg)/.test type
+      @parseImage file
+    else if /(javascript|js|coffee|iced)/.test type
+      @parseScript file
+    else
+      @console.print "Unknown filetype: #{type}"
 
+  parseImage: (file) ->
+    {name} = file
     window.assets or= []
     varname = "window.assets[#{window.assets.length}]"
     @console.print "Adding #{name} as #{varname}"
@@ -214,6 +221,32 @@ var newimage = #{varname}
     @val value
     @codemirror.scrollIntoView 0
 
+  parseScript: (file) ->
+    {name} = file
+    window.userscripts ?= []
+    varname = "window.userscripts[#{window.userscripts.length}]"
+    @console.print "Adding #{name} as #{varname}"
+
+    @fileQueue or= new FileQueue
+    await @fileQueue.awaitRead {file: file, readAs: "Text"}, defer status, text
+    return @log "Error: #{text}" if status is "error"
+
+    window.userscripts.push text
+    value = switch @lang()
+      when "coffee" then """# #{name}
+# if this is a CommonJS module, run:
+# require.define "module-name": eval #{varname}
+newscript = #{varname}
+#{@val().trim()}
+"""
+      when "vanilla" then """// #{name}
+// if this is a CommonJS module, run:
+// require.define({"module-name": eval(#{varname})})
+var newscript = #{varname}
+#{@val().trim()}
+"""
+    @val value
+    @codemirror.scrollIntoView 0
 
 
 module.exports = Editor

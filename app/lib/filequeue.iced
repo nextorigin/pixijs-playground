@@ -27,7 +27,7 @@ class FileQueue
     @pipeliner.n_out = 0
 
   defaults:
-    readtype: "DataURL"
+    readAs: "DataURL"
     encoding: "UTF-8"
 
   readFile: (params = {}, defaults = {}) ->
@@ -36,7 +36,7 @@ class FileQueue
     reader.onload  = (e) -> settings.success reader.result
     reader.onerror = settings.error
 
-    read = switch settings.readtype
+    read = switch settings.readAs
       when "ArrayBuffer"  then reader.readAsArrayBuffer settings.file, settings.encoding
       when "BinaryString" then reader.readAsBinaryString settings.file, settings.encoding
       when "DataURL"      then reader.readAsDataURL settings.file, settings.encoding
