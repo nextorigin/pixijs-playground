@@ -34,7 +34,7 @@ createBunny = (texture, x, y) ->
     # we want to track the movement of this particular touch
     @data = data
     @alpha = draggingAlpha
-    @dragging = true
+    @dragging = @data.getLocalPosition(@parent)
 
   # set the events for when the mouse is released or a touch is released
   bunny.mouseup = bunny.mouseupoutside = bunny.touchend = bunny.touchendoutside = (data) ->
@@ -45,11 +45,12 @@ createBunny = (texture, x, y) ->
 
   # set the callbacks for when the mouse or a touch moves
   bunny.mousemove = bunny.touchmove = (data) ->
-    if @dragging
-      # need to get parent coords..
-      newPosition = @data.getLocalPosition(@parent)
-      @position.x = newPosition.x
-      @position.y = newPosition.y
+    return unless @dragging
+    # need to get parent coords..
+    newPosition  = @data.getLocalPosition(@parent)
+    @position.x += newPosition.x - @dragging.x
+    @position.y += newPosition.y - @dragging.y
+    @dragging    = newPosition
 
   # move the sprite to its designated position
   bunny.position.x = x
