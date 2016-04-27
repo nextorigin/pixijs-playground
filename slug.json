@@ -13,7 +13,8 @@
       "libs"    : [
         "lib/runtime.js",
         "lib/stats.min.js",
-        "lib/pixi.dev.js"
+        "lib/pixi.dev.js",
+        "lib/Tween.js"
       ],
       "modules" : [
         "es5-shimify",
