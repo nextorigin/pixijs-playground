@@ -1,13 +1,47 @@
 {
-  "name": "app",
-  "version": "0.0.1",
+  "name": "pixijs-playground",
+  "version": "1.0.0",
+  "description": "Interactive PixiJS playground in [Iced] CoffeeScript and JavaScript.  Like JSFiddle, with a REPL and HTML5 local image drag + drop.",
+  "main": "lib/pixijs-playground.js",
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
-    "es5-shimify": "~2.0.5",
-    "json2ify": "~0.0.3",
-    "jqueryify": "~1.9.1",
-    "spine": "~1.2.0",
-    "codemirror": "~3.2.0",
-    "iced-coffee-script": "~1.6.0",
-    "emoji-images": "~0.1.1"
-  }
+    "emoji-images": "^0.1.1",
+    "es5-shimify": "^2.0.5",
+    "jqueryify": "^1.9.1",
+    "json2ify": "^0.0.3",
+    "spine": "^1.2.2",
+    "iced-coffee-script": "^1.6.3-g",
+    "codemirror": "^3.19.0",
+    "js2coffee": "^0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextorigin/pixijs-playground.git"
+  },
+  "keywords": [
+    "pixi",
+    "pixijs",
+    "playground",
+    "jsfiddle",
+    "coffeescript",
+    "coffee-script",
+    "iced",
+    "browser",
+    "canvas",
+    "webgl",
+    "editor",
+    "example"
+  ],
+  "author": "doublerebel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nextorigin/pixijs-playground/issues"
+  },
+  "homepage": "https://github.com/nextorigin/pixijs-playground#readme"
 }
