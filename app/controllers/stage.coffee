@@ -54,6 +54,8 @@ class Stage extends Spine.Controller
 
     @render()
     @bindResize()
+    @addChild = @append
+    @removeChildren = @remove
 
   render: ->
     # let pixi choose WebGL or canvas
@@ -73,13 +75,53 @@ class Stage extends Spine.Controller
   hideStats: -> @$stats.css display: "none"
   showStats: -> @$stats.css display: "block"
 
+  append: (children...) ->
+    for child in children
+      if child.display
+        child.stage = this
+        child = child.display
+      @stage.addChild child
+    this
+
+  addChild: ->
+
+  remove: (children...) ->
+    children = @stage.children unless children.length
+
+    for child in children by -1
+      if child.display
+        child.stage = null
+        child = child.display
+      @stage.removeChild child
+    this
+
   removeChildren: ->
-    @stage.removeChild child for child in @stage.children by -1
 
   refresh: ->
     @removeChildren()
     @stats.end()
     @renderer.render @stage
+
+  stackLevel: (child) -> @stage.children.indexOf (child.display or child)
+
+  bringToFront: (children...) ->
+    @removeChildren children...
+    @append children...
+
+  sendToBack: (children...) ->
+    @moveInStack children..., 0
+
+  moveInStack: (children..., newLevel) ->
+    @removeChildren children...
+    @addChildrenAt children..., newLevel
+
+  addChildrenAt: (children..., newLevel) ->
+    for child in children
+      if child.display
+        child.stage = this
+        child = child.display
+    @stage.addChildAt (child.display or child), newLevel for child in children
+    this
 
 
 module.exports = Stage
