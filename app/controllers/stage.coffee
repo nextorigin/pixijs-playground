@@ -20,19 +20,25 @@ class Stage extends Spine.Controller
     $(window).off "resize", @resize
     $(window).off "onorientationchange", @resize
 
-  ani: (loopfn) ->
-    recursiveloop = ->
+  _frameFns:     []
+  addFrameFn:    (fn) -> @_frameFns.push fn
+  removeFrameFn: (fn) -> @_frameFns.splice (@_frameFns.indexOf fn), 1
+
+  ani: (loopfn = ->) ->
+    @addFrameFn loopfn
+
+    recursiveloop = =>
       # Beginning of animation loop
       @stats.begin()
       # Call the animation
-      loopfn()
+      fn() for fn in @_frameFns
       # render the stage
       @renderer.render @stage
       # Recursively loop this animation
-      window.frame = requestAnimFrame recursiveloop
+      @frame = requestAnimFrame recursiveloop
       # End of animation loop
       @stats.end()
-    window.frame = requestAnimFrame recursiveloop
+    @frame = requestAnimFrame recursiveloop
 
   constructor: (options, pixisettings = {}) ->
     super
@@ -43,7 +49,8 @@ class Stage extends Spine.Controller
     @stage.width       = @el.width()
     @stage.height      = @el.height()
     @stage.interactive = @pixisettings.interactive
-    window.stage  = @stage
+    window.stage = this
+    window.ani = @proxy @ani
 
     @render()
     @bindResize()
@@ -61,13 +68,7 @@ class Stage extends Spine.Controller
     # attach render to page
     @el.append @renderer.view
     @hideStats()
-    $('body').append @$stats
-
-    # "Export" values where sandbox can reach them
-    window.renderer = @renderer
-    window.stats    = @stats
-    window.frame    = undefined
-    window.ani      = @ani
+    @el.append @$stats
 
   hideStats: -> @$stats.css display: "none"
   showStats: -> @$stats.css display: "block"
