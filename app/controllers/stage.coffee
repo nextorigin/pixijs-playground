@@ -1,8 +1,14 @@
-Spine = require "spine"
+Spine    = require "spine"
+{extend} = require "/lib/utils"
 
 
 class Stage extends Spine.Controller
   logPrefix: "(Playground:Stage)"
+
+  pixidefaults:
+    backgroundColor: 0xFFFFFF
+    transparent: false
+    antialias: false
 
   resize: ->
 
@@ -28,12 +34,15 @@ class Stage extends Spine.Controller
       @stats.end()
     window.frame = requestAnimFrame recursiveloop
 
-  constructor: ->
+  constructor: (options, pixisettings = {}) ->
     super
 
-    @stage        = new PIXI.Stage(0xEEFFFF)
-    @stage.width  = @el.width()
-    @stage.height = @el.height()
+    @pixisettings      = extend {}, @pixidefaults, pixisettings
+
+    @stage             = new PIXI.Stage @pixisettings.backgroundColor
+    @stage.width       = @el.width()
+    @stage.height      = @el.height()
+    @stage.interactive = @pixisettings.interactive
     window.stage  = @stage
 
     @render()
@@ -41,7 +50,11 @@ class Stage extends Spine.Controller
 
   render: ->
     # let pixi choose WebGL or canvas
-    @renderer = PIXI.autoDetectRenderer @stage.width, @stage.height
+    @renderer = PIXI.autoDetectRenderer @stage.width,
+                                        @stage.height,
+                                        null,
+                                        @pixisettings.transparent,
+                                        @pixisettings.antialias
     @stats    = new Stats
     @$stats   = $ @stats.domElement
 
