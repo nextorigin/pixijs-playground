@@ -1,18 +1,18 @@
-require 'lib/setup'
+require './lib/setup'
 emoji     = require 'emoji-images'
 
 Spine    = require 'spine'
-Stage    = require 'controllers/stage'
-Console  = require 'controllers/console'
-Editor   = require 'controllers/editor'
-examples = require 'models/examples'
+Stage    = require './controllers/stage'
+Console  = require './controllers/console'
+Editor   = require './controllers/editor'
+examples = require './models/examples'
 
 
 escapeHTML = (s) ->
   s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
 
-class App extends Spine.Controller
+class Playground extends Spine.Controller
   logPrefix: "(Playground:App)"
 
   DEFAULT_SETTINGS =
@@ -45,6 +45,7 @@ class App extends Spine.Controller
 
   constructor: (options, settings = {}) ->
     super
+    @log "initializing"
 
     @settings = $.extend({}, DEFAULT_SETTINGS)
 
@@ -67,7 +68,7 @@ class App extends Spine.Controller
     @buttonRefreshPlayground.show()
 
   render: (examplelist = [], example) ->
-    @view = require("views/index")({examples: examplelist, example: example})
+    @view = (require "./views/templates").index examples: examplelist, example: example
     @view = emoji @view, "images/emoji", 20
     @html @view
 
@@ -83,4 +84,4 @@ class App extends Spine.Controller
   langChange: (name) -> @settings.lang = name
 
 
-module.exports = App
+module.exports = Playground

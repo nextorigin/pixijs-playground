@@ -1,5 +1,5 @@
-nodeutil  = require 'lib/nodeutil'
 Spine     = require 'spine'
+nodeutil  = require '../lib/nodeutil'
 
 
 class Console extends Spine.Controller

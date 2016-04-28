@@ -1,5 +1,9 @@
 Spine    = require "spine"
-{extend} = require "/lib/utils"
+
+
+extend = (base, objs...) ->
+  base[key] = value for key, value of obj for obj in objs
+  base
 
 
 class Stage extends Spine.Controller

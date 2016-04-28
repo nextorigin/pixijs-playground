@@ -1,5 +1,5 @@
 Spine     = require 'spine'
-FileQueue = require 'lib/filequeue'
+FileQueue = require '../lib/filequeue'
 
 
 class Editor extends Spine.Controller

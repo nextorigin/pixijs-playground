@@ -1,6 +1,6 @@
 require('json2ify')
 require('es5-shimify')
-require('jqueryify')
+jQuery = require('jqueryify')
 
 require('spine')
 require('spine/lib/local')
@@ -8,12 +8,17 @@ require('spine/lib/manager')
 require('spine/lib/route')
 
 require('iced-coffee-script')
-require('iced-coffee-script/extras/coffee-script-iced')
+# require('iced-coffee-script/extras/coffee-script-iced')
 
-require('lib/spine.ajax')
-require('lib/spine.awaitajax')
+require('./spine.ajax')
+require('./spine.awaitajax')
 
 require('codemirror/lib/codemirror')
-require('lib/codemirror-iced-coffee-script')
+require('./codemirror-iced-coffee-script')
 
-window.Math2 = require('lib/Math2')
+window.Math2 = require('./Math2')
+
+jQuery ->
+  return if window.app
+  App = require "../pixijs-playground"
+  window.app = new App el: $ "body"
