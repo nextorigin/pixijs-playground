@@ -1,5 +1,5 @@
-Spine     = require 'spine'
-nodeutil  = require '../lib/nodeutil'
+Spine     = require "spine"
+{inspect} = require "util"
 
 
 class Console extends Spine.Controller
@@ -117,7 +117,7 @@ class Console extends Spine.Controller
     undefined
 
   printValue: (value) =>
-    @print nodeutil.inspect value, @settings.showHidden, @settings.maxDepth, @settings.colorize
+    @print inspect value, @settings.showHidden, @settings.maxDepth, @settings.colorize
 
   printCompileError: (e) ->
     if e.stack
