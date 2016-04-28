@@ -10,6 +10,7 @@ source  = require "vinyl-source-stream"
 wtfy    = require "watchify"
 chalk   = require "chalk"
 del     = require "del"
+pkg     = require "./package"
 
 
 plugins     = Plugins()
@@ -112,6 +113,13 @@ bundleAll = (watch = false) ->
 
 clean = (cb) -> del config.builddirs, cb
 
+server = null
+serve = ->
+  server = plugins.liveServer pkg.bin, env: NODE_ENV: "development"
+  server.start()
+
+liveReload = ->
+  server.notify()
 
 gulp.task "css:copy", ->
   src   config.css.src
@@ -161,4 +169,8 @@ gulp.task "watchify", -> bundleAll true
 gulp.task "build", ["styl", "css", "js"]
 gulp.task "clean", clean
 gulp.task "watch", ["styl:watch", "js:watch", "coffee:watch", "watchify"]
+
+gulp.task "serve", serve
+gulp.task "live", ["watch", "serve"]
+
 gulp.task "default", ["build"]

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Interactive PixiJS playground in [Iced] CoffeeScript and JavaScript.  Like JSFiddle, with a REPL and HTML5 local image drag + drop.",
   "main": "lib/pixijs-playground.js",
+  "bin": "bin/server.js",
   "directories": {
     "test": "test"
   },
@@ -15,17 +16,20 @@
     "iced-coffee-script": "^108.0.11",
     "codemirror": "^3.19.0",
     "js2coffee": "^0.2.3"
+    "nextorigin-express-skeleton": "^0.11.0-pugfix"
   },
   "devDependencies": {
     "@lukekarrys/jade-runtime": "^1.11.1",
     "browserify": "^13.0.0",
     "browserify-global-shim": "^1.0.3",
     "chalk": "^1.1.3",
+    "connect-livereload": "^0.5.4",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-changed": "^1.3.0",
     "gulp-iced-coffee": "ccheever/gulp-iced-coffee",
+    "gulp-live-server": "0.0.29",
     "gulp-load-plugins": "^1.2.2",
     "gulp-notify": "^2.2.0",
     "gulp-sourcemaps": "^2.0.0-alpha",
@@ -40,7 +44,9 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/iced --bare --map --runtime node -o ./bin -c binsrc/",
+    "start": "node bin/server.js"
   },
   "repository": {
     "type": "git",

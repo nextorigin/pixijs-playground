@@ -1,1 +1,1 @@
-web: serveup ./public
+web: npm start
