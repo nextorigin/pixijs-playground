@@ -10,7 +10,6 @@
   "dependencies": {
     "emoji-images": "^0.1.1",
     "es5-shimify": "^2.0.5",
-    "jqueryify": "^1.9.1",
     "json2ify": "^0.0.3",
     "spine": "^1.2.2",
     "iced-coffee-script": "^108.0.11",
