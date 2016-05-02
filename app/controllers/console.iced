@@ -11,7 +11,7 @@ class Console extends Spine.Controller
     maxLines: 8
     maxDepth: 2
     showHidden: false
-    colorize: true
+    colorize: false
 
   elements:
     "button.refresh-console": "buttonRefreshConsole"
