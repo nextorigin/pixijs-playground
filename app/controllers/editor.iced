@@ -1,5 +1,7 @@
-Spine     = require 'spine'
-FileQueue = require '../lib/filequeue'
+Spine      = require 'spine'
+CodeMirror = require "codemirror"
+IcedMirror = require "codemirror-iced-coffee-script"
+FileQueue  = require '../lib/filequeue'
 
 
 class Editor extends Spine.Controller

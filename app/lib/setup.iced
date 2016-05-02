@@ -12,8 +12,6 @@ require('iced-coffee-script')
 require('./spine.ajax')
 require('./spine.awaitajax')
 
-require('codemirror/lib/codemirror')
-require('./codemirror-iced-coffee-script')
 
 window.Math2 = require('./Math2')
 
