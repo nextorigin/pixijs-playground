@@ -1,5 +1,6 @@
 Spine    = require "spine"
 PIXI     = require "../lib/pixi.dev.js"
+Stats    = require "stats.js"
 
 
 extend = (base, objs...) ->
@@ -78,7 +79,7 @@ class Stage extends Spine.Controller
     @el.append @$stats
 
   hideStats: -> @$stats.css display: "none"
-  showStats: -> @$stats.css display: "block"
+  showStats: -> @$stats.css display: "block", position: "absolute"
 
   append: (children...) ->
     for child in children

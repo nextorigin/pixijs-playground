@@ -45,7 +45,6 @@ config =
     dest: "build/js/"
   browserify:
     libs: [
-      "lib/stats.min.js",
       "lib/Tween.js"
       "build/js/pixijs-playground.js"
     ]
