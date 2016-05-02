@@ -10,7 +10,6 @@
   "dependencies": {
     "emoji-images": "^0.1.1",
     "es5-shimify": "^2.0.5",
-    "json2ify": "^0.0.3",
     "spine": "^1.2.2",
     "js2coffee": "^0.2.3"
     "nextorigin-express-skeleton": "^0.11.0-pugfix"
