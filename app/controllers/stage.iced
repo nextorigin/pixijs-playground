@@ -55,8 +55,10 @@ class Stage extends Spine.Controller
     @stage.width       = @el.width()
     @stage.height      = @el.height()
     @stage.interactive = @pixisettings.interactive
-    window.stage = this
-    window.ani = @proxy @ani
+
+    window.stage = @stage
+    window.ani   = @proxy @ani
+    window.PIXI  = PIXI
 
     @render()
     @bindResize()
@@ -73,6 +75,9 @@ class Stage extends Spine.Controller
     @stats    = new Stats
     @$stats   = $ @stats.domElement
 
+    # attach renderer, stats instances to window
+    window.renderer = @renderer
+    window.stats    = @stats
     # attach render to page
     @el.append @renderer.view
     @hideStats()
