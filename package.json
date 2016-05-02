@@ -36,6 +36,7 @@
     "js2coffee": "^2.2.0",
     "mkdirp": "^0.5.1",
     "noty": "^2.3.8",
+    "prependify": "^1.2.0",
     "spine": "^1.6.2",
     "stats.js": "^0.16.0",
     "stream-combiner": "^0.2.2",

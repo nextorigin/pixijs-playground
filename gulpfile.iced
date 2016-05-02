@@ -6,6 +6,7 @@ Combine = require "stream-combiner"
 tmpl    = require "templatizer"
 bify    = require "browserify"
 bifyshm = require "browserify-global-shim"
+preppy  = require "prependify"
 source  = require "vinyl-source-stream"
 wtfy    = require "watchify"
 chalk   = require "chalk"
@@ -97,6 +98,7 @@ bundleAll = (watch = false) ->
   b     = bify config.browserify.libs, fullPaths: watch, debug: true, cache: {}, packageCache: {}
   shim  = bifyshm.configure "jquery": "$", appliesTo: includeExtensions: ['.js']
 
+  b.plugin preppy, "window.require = "
   b.transform shim, global: true
   if watch
     log "watching"
