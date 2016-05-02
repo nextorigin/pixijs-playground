@@ -94,7 +94,7 @@ makewatcher = (src) ->
 
 bundleAll = (watch = false) ->
   watch = watch is true
-  b     = bify config.browserify.libs, fullPaths: watch, cache: {}, packageCache: {}
+  b     = bify config.browserify.libs, fullPaths: watch, debug: true, cache: {}, packageCache: {}
   shim  = bifyshm.configure "jquery": "$", appliesTo: includeExtensions: ['.js']
 
   b.transform shim, global: true
