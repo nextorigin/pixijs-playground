@@ -1,4 +1,5 @@
 Spine     = require "spine"
+Iced      = require 'iced-coffee-script'
 {inspect} = require "util"
 
 
@@ -99,7 +100,7 @@ class Console extends Spine.Controller
   processSaved: ->
     try
       compiled = switch @lang()
-        when "coffee" then IcedCoffeeScript.compile @saved, bare: on
+        when "coffee" then Iced.compile @saved, bare: on
         when "vanilla" then @saved
 
       value = eval.call window, compiled

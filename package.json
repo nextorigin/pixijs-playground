@@ -12,7 +12,6 @@
     "es5-shimify": "^2.0.5",
     "json2ify": "^0.0.3",
     "spine": "^1.2.2",
-    "iced-coffee-script": "^108.0.11",
     "js2coffee": "^0.2.3"
     "nextorigin-express-skeleton": "^0.11.0-pugfix"
   },
@@ -36,6 +35,7 @@
     "gulp-stylus": "^2.3.1",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
+    "iced-coffee-script": "^108.0.11",
     "mkdirp": "^0.5.1",
     "noty": "^2.3.8",
     "stats.js": "^0.16.0",

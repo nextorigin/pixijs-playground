@@ -1,4 +1,5 @@
 Spine      = require 'spine'
+Iced       = require 'iced-coffee-script'
 CodeMirror = require "codemirror"
 IcedMirror = require "codemirror-iced-coffee-script"
 FileQueue  = require '../lib/filequeue'
@@ -46,7 +47,7 @@ class Editor extends Spine.Controller
     @trigger "presave"
     try
       compiled = switch @lang()
-        when "coffee" then IcedCoffeeScript.compile @saved, bare: on
+        when "coffee" then Iced.compile @saved, bare: on, runtime: "inline"
         when "vanilla" then @saved
 
       value = eval.call window, compiled
@@ -159,7 +160,7 @@ class Editor extends Spine.Controller
       return true
 
     try
-      compiled = IcedCoffeeScript.compile input, bare: on
+      compiled = Iced.compile input, bare: on, runtime: "inline"
       @val compiled
       @lang "vanilla"
       return true

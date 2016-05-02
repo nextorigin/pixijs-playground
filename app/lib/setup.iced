@@ -6,9 +6,6 @@ require('spine/lib/local')
 require('spine/lib/manager')
 require('spine/lib/route')
 
-require('iced-coffee-script')
-# require('iced-coffee-script/extras/coffee-script-iced')
-
 require('./spine.ajax')
 require('./spine.awaitajax')
 
