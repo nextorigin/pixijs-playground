@@ -31,6 +31,9 @@ config =
   styl:
     src:  "css/*.styl"
     dest: "public/css"
+  codemirror:
+    src:  "node_modules/codemirror/lib/*.css"
+    dest: "public/css/"
   js:
     src:  "app/**/*.js"
     dest: "build/js/"
@@ -43,7 +46,6 @@ config =
   browserify:
     libs: [
       "lib/stats.min.js",
-      "lib/pixi.dev.js",
       "lib/Tween.js"
       "build/js/pixijs-playground.js"
     ]
@@ -55,6 +57,11 @@ notifier = plugins.notify.onError title: "pixijs-playground - error", message: "
 copyCSS = new Combine [
   plugins.changed config.css.dest
   dest config.css.dest
+]
+
+copyCodemirror = new Combine [
+  plugins.changed config.codemirror.dest
+  dest config.codemirror.dest
 ]
 
 compileStyl = new Combine [
@@ -130,6 +137,10 @@ gulp.task "css:watch", ->
   .pipe makewatcher config.css.src
   .pipe copyCSS
 
+gulp.task "css:codemirror", ->
+  src   config.codemirror.src
+  .pipe copyCodemirror
+
 gulp.task "styl", ->
   src   config.styl.src
   .pipe compileStyl
@@ -139,7 +150,7 @@ gulp.task "styl:watch", ->
   .pipe makewatcher config.styl.src
   .pipe compileStyl
 
-gulp.task "css", ["css:copy", "styl"]
+gulp.task "css", ["css:copy", "css:codemirror", "styl"]
 
 gulp.task "templatizer", ->
   mkdirp.sync path.dirname config.templatizer.dest

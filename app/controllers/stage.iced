@@ -1,4 +1,5 @@
 Spine    = require "spine"
+PIXI     = require "../lib/pixi.dev.js"
 
 
 extend = (base, objs...) ->
