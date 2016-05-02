@@ -2,6 +2,7 @@ Spine      = require 'spine'
 Iced       = require 'iced-coffee-script'
 CodeMirror = require "codemirror"
 IcedMirror = require "codemirror-iced-coffee-script"
+js2coffee  = require "js2coffee/dist/js2coffee"
 FileQueue  = require '../lib/filequeue'
 
 
@@ -168,27 +169,20 @@ class Editor extends Spine.Controller
       @console.printCompileError e
       return false
 
-  # "js2coffee/out/lib/browser" refuses to be parsed by concatenator/minifier
-  # switchToCoffee: ->
-  #   unless input = @val()
-  #     @lang "coffee"
-  #     return true
-
-  #   try
-  #     compiled = js2coffee.build input, {show_src_lineno: true, indent: "  "}
-  #     @val "#{compiled}"
-  #     @lang "coffee"
-  #     return true
-  #   catch e
-  #     output = @console.printCompileError e
-  #     @print output
-  #     return false
-
   switchToCoffee: ->
-    # @clear()
-    # @refreshExample()
-    @lang "coffee"
-    return true
+    unless input = @val()
+      @lang "coffee"
+      return true
+
+    try
+      compiled = js2coffee.build input, {show_src_lineno: true, indent: "  "}
+      @val "#{compiled.code}"
+      @lang "coffee"
+      return true
+    catch e
+      output = @console.printCompileError e
+      @print output
+      return false
 
   fileDragHover: (e) ->
     e.stopPropagation()
