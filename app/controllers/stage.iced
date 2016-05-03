@@ -41,10 +41,10 @@ class Stage extends Spine.Controller
       # render the stage
       @renderer.render @stage
       # Recursively loop this animation
-      @frame = requestAnimFrame recursiveloop
+      window.frame = requestAnimFrame recursiveloop
       # End of animation loop
       @stats.end()
-    @frame = requestAnimFrame recursiveloop
+    window.frame = requestAnimFrame recursiveloop
 
   constructor: (options, pixisettings = {}) ->
     super
