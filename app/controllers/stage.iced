@@ -73,7 +73,7 @@ class Stage extends Spine.Controller
                                         @pixisettings.transparent,
                                         @pixisettings.antialias
     @stats    = new Stats
-    @$stats   = $ @stats.domElement
+    @$stats   = $ @stats.dom
 
     # attach renderer, stats instances to window
     window.renderer = @renderer
