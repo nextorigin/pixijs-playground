@@ -6,6 +6,9 @@ js2coffee  = require "js2coffee/dist/js2coffee"
 FileQueue  = require '../lib/filequeue'
 
 
+capitalize = (str) -> str[0].toUpperCase() + str[1..]
+
+
 class Editor extends Spine.Controller
   logPrefix: "(Playground:Editor)"
 
@@ -48,7 +51,7 @@ class Editor extends Spine.Controller
     @trigger "presave"
     try
       compiled = switch @lang()
-        when "coffee" then Iced.compile @saved, bare: on, runtime: "inline"
+        when "coffee"  then @compileIced @saved
         when "vanilla" then @saved
 
       value = eval.call window, compiled
@@ -155,13 +158,15 @@ class Editor extends Spine.Controller
 
   clear: -> @val ""
 
+  compileIced: (source) -> Iced.compile source, bare: on, runtime: "inline"
+
   switchToVanilla: ->
     unless input = @val()
       @lang "vanilla"
       return true
 
     try
-      compiled = Iced.compile input, bare: on, runtime: "inline"
+      compiled = @compileIced input
       @val compiled
       @lang "vanilla"
       return true
@@ -201,13 +206,13 @@ class Editor extends Spine.Controller
     @parseFile file for file in files
 
   parseFile: (file) ->
-    {type} = file
+    {type, name} = file
     if /(png|gif|jpeg|jpg)/.test type
       @parseImage file
-    else if /(javascript|js|coffee|iced)/.test type
+    else if /(javascript|js|coffee|iced)/.test name
       @parseScript file
     else
-      @console.print "Unknown filetype: #{type}"
+      @console.print "Unknown filetype: #{type}: #{name}"
 
   parseImage: (file) ->
     {name} = file
@@ -233,33 +238,45 @@ var newimage = #{varname}
     @codemirror.scrollIntoView 0
 
   parseScript: (file) ->
-    {name} = file
+    {name}    = file
+    firstDot  = name.indexOf "."
+    firstDot  = name.length if firstDot is -1
+    guessname = capitalize name[0...firstDot]
+
     window.userscripts ?= []
     varname = "window.userscripts[#{window.userscripts.length}]"
-    @console.print "Adding #{name} as #{varname}"
+    @console.print "Adding #{name} as window.#{guessname} = #{varname}"
 
     @fileQueue or= new FileQueue
     await @fileQueue.awaitRead {file: file, readAs: "Text"}, defer status, text
     return @log "Error: #{text}" if status is "error"
 
-    window.userscripts.push text
+    text = @compileIced text if /(iced|coffee)/.test name
+
+    try
+      compiled = eval text
+    catch e
+      return @console.printCompileError e
+
+    window.userscripts.push compiled
+    window[guessname] = compiled
     value = switch @lang()
       when "coffee" then """# #{name}
-# if this is a CommonJS module, run:
-# require.define "module-name": eval #{varname}
+# Success!  If this is a CommonJS module,
+# it is available at window.#{guessname}
 #
 # to save this in localStorage with the script, run:
 # app.editor.saveUserScript #{varname}
-newscript = #{varname}
+newscript = window.#{guessname}
 #{@val().trim()}
 """
       when "vanilla" then """// #{name}
-// if this is a CommonJS module, run:
-// require.define({"module-name": eval(#{varname})})
+// Success!  If this is a CommonJS module,
+// it is available at window.#{guessname}
 //
 // to save this in localStorage with the script, run:
 // app.editor.saveUserScript(#{varname})
-var newscript = #{varname}
+var newscript = window.#{guessname}
 #{@val().trim()}
 """
     @val value
