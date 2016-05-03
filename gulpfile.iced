@@ -48,6 +48,7 @@ config =
     expose:
       "./lib/dat.gui.min":  "dat-gui"
       "iced-coffee-script": null
+      "spine":              null
       "tween.js":           null
     libs: [
       "build/js/pixijs-playground.js"
