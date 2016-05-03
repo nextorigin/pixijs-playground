@@ -46,7 +46,8 @@ config =
     dest: "build/js/"
   browserify:
     expose:
-      "./lib/dat.gui.min": "dat-gui"
+      "./lib/dat.gui.min":  "dat-gui"
+      "iced-coffee-script": null
     libs: [
       "lib/Tween.js"
       "build/js/pixijs-playground.js"
@@ -101,7 +102,7 @@ bundleAll = (watch = false) ->
   shim  = bifyshm.configure "jquery": "$", appliesTo: includeExtensions: ['.js']
 
   b.plugin preppy, "window.require = "
-  b.require file, expose: name for file, name of config.browserify.expose
+  b.require file, expose: (name or file) for file, name of config.browserify.expose
   b.transform shim, global: true
   if watch
     log "watching"
