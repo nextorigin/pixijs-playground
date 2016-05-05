@@ -1,6 +1,6 @@
 {
   "name": "pixijs-playground",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Interactive PixiJS playground in [Iced] CoffeeScript and JavaScript.  Like JSFiddle, with a REPL and HTML5 local image drag + drop.",
   "main": "lib/pixijs-playground.js",
   "bin": "bin/server.js",
