@@ -6,7 +6,7 @@ camelCase = (word) -> word[1].toLowerCase() + word[1..-1]
 
 # Initialize GUI
 $(".dg.main").remove()
-dat = require "lib/dat.gui.min"
+dat = require "dat-gui"
 gui = new dat.GUI
 
 # Enable first filter only
