@@ -29,13 +29,6 @@ Server = (function(_super) {
     }
   }
 
-  Server.prototype.bindRoutes = function() {
-    this.debug("binding routes");
-    return this.app.get("/", function(req, res) {
-      return res.send(path.join(__dirname, "../public/index.html"));
-    });
-  };
-
   return Server;
 
 })(Skeleton);
