@@ -1,5 +1,7 @@
 # PixiJS Playground
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nextorigin/pixijs-playground.svg)](https://greenkeeper.io/)
+
 Interactive PixiJS playground in [Iced] CoffeeScript and JavaScript. Like JSFiddle, with a REPL and HTML5 local file (image and script) drag + drop.
 
 https://github.com/nextorigin/pixijs-playground
